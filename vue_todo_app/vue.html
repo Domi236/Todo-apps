@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+
+<body>
+
+<div id="app">
+    <task-list post-title="Todo-List" add-todo="+">
+        <task v-for="task in tasks">
+            {{ task.name }}
+            <button @click="removeTask(task)">-</button>
+        </task>
+    </task-list>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="./main.js"></script>
+
+</body>
+</html>
+
+
+
