@@ -1,5 +1,4 @@
-<?php
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,6 +9,7 @@
   li {
     display: flex;
   }
+
 </style>
 
 <body>
@@ -28,8 +28,11 @@
 
     let todoList = document.getElementById("todoList"); 
 
-    let todos = ['foo', 'Js', 'PHP', 'Bar'];
+    let todos = ['Foo','Bar', 'Blag', 'Todo', 'Das', 'Vue'];
 
+      
+      
+//remove all todos and create todos from the todos-array 
     function createTodos() {
       while (todoList.hasChildNodes()) { 
         todoList.removeChild(todoList.firstChild); 
@@ -44,7 +47,7 @@
         let todoContent = document.createTextNode(todos[i]);
         todoElement.appendChild(todoContent);
 
-        let closeBtn = document.createElement('span');
+        let closeBtn = document.createElement('button');
         let closeBtnContent = document.createTextNode('   -');
         closeBtn.appendChild(closeBtnContent);
         closeBtn.className = 'close';
@@ -56,6 +59,9 @@
       }
     }
 
+      
+      
+//add todo new todo and clear the input field
     function addTodo() {
       let input = document.getElementById("input").value; 
       todos.push(input);
@@ -63,7 +69,10 @@
 
       createTodos();
     }
+      
 
+      
+//remove current todo per click
     function removeTodo(closeBtn, todoElement) {
 
       closeBtn.addEventListener('click', () => {

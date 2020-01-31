@@ -9,7 +9,7 @@
 
 <div id="app">
     <task-list post-title="Todo-List" add-todo="+">
-        <task v-for="task in tasks">
+        <task v-for="task in tasks">                           
             {{ task.name }}
             <button @click="removeTask(task)">-</button>
         </task>
@@ -17,7 +17,67 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script src="./main.js"></script>
+    
+<script>
+Vue.component('TaskList', {
+  template: `
+    <div>
+      <h3>{{ postTitle }}</h3>
+      <slot></slot>
+      <input id="input"/>
+      <button @click="addTask">{{ addTodo }}</button>
+    </div>
+  `,
+//define the values to be tranferred
+  props: ['postTitle', 'addTodo'],  
+
+// function which add a new todo to the tasks array and clear the input after that
+  methods: {
+    addTask() {
+      let name = document.querySelector('#input');
+      if(name.value !== '') {
+        app.tasks.push({name: name.value});
+        name.value = '';
+      }
+    }
+  }
+});
+
+
+Vue.component('Task', {
+  template: `
+    <div>
+      <slot></slot>
+    </div>
+  `,
+});
+
+
+//initialize new Vue with a data array
+var app = new Vue({              
+  el: '#app',
+  data: {
+    tasks: [
+      {name: 'Foo'},
+      {name: 'Bar'},
+      {name: 'Blag'},
+      {name: 'Todo'},
+      {name: 'Das'},
+      {name: 'Vue'},
+    ],
+  },
+
+// function which remove all todos from the tasks array, which are the same as the clicked todo 
+methods: {                                                                                          
+    removeTask(taskToRemove) {
+      app.tasks = app.tasks.filter(task =>  task.name !== taskToRemove.name)
+    }
+  }
+});
+
+
+
+</script>
 
 </body>
 </html>
